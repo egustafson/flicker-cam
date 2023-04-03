@@ -1,0 +1,10 @@
+---
+# file:  [ansible]/roles/timesyncd/handlers/main.yml
+
+- name: restart systemd-timesyncd
+  become: true
+  systemd:
+    name: systemd-timesyncd
+    state: restarted
+
+...

@@ -1,0 +1,20 @@
+---
+# file: [ansible]/roles/timesyncd/tasks/main.yml
+
+- name: set the timezone
+  become: true
+  timezone:
+    name: "{{ site_timezone }}"
+  when: site_timezone is defined
+
+- name: set timesyncd.conf to local ntp server
+  become: true
+  lineinfile:
+    path: /etc/systemd/timesyncd.conf
+    regexp: '^#?NTP='
+    line: "NTP={{ site_ntp_server }}"
+  notify:
+    - restart systemd-timesyncd
+  when: site_ntp_server is defined
+
+...

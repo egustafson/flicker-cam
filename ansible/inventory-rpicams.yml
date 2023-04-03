@@ -1,0 +1,21 @@
+---
+all:
+  vars:
+    site_apt_proxy: http://apt.elfwerks:3142/
+    site_timezone: America/Denver
+    site_ntp_server: 10.3.4.254
+  hosts:
+    flicker1.elfwerks:
+      ansible_user: pi
+    flicker2.elfwerks:
+      ansible_user: pi
+    flickerp.elfwerks:
+      ansible_user: pi
+
+  children:
+    rpicams:
+      hosts:
+        flicker1.elfwerks:
+        flicker2.elfwerks:
+        flickerp.elfwerks:
+...

@@ -1,0 +1,28 @@
+---
+# file:  [ansible]/pi-cam-v1.yml
+
+- hosts: rpicams
+
+  roles:
+    - rpi_disable_swap
+    - apt_proxy
+    - timesyncd
+    - os_update
+    - os_extras
+    - node_exporter
+    - raspi_config  # enable camera, limit GPU memory
+
+...
+
+# Additional work needed:
+#
+# * SUPERCEEDED on Bullseye by libcamera
+# * enable camera: 'sudo raspi-config + reboot'
+# * verify camera: 'vcgencmd get_camera' <- supported & detected
+#
+# * install UV4L (see README on flicker1)
+# * customize systemd script w/ uv4l tuning
+#
+# * syslog -> offbox logs (mimir)
+#
+# * read-only root

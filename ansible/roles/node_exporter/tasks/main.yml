@@ -1,0 +1,9 @@
+---
+# file:  [ansible]/role/node_exporter/tasks/main.yml
+
+- name: install node_exporter package
+  become: true
+  apt:
+    state: latest
+    name: prometheus-node-exporter
+...

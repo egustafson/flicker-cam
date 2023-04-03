@@ -1,0 +1,21 @@
+[Unit]
+Description=UV4L Raspicam
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/uv4l \
+  -f -k \
+  --rotation 90 \
+  --width 720 \
+  --height 1280 \
+  --sched-fifo \
+  --mem-lock \
+  --config-file=/etc/uv4l/uv4l-raspicam.conf \
+  --driver raspicam \
+  --driver-config-file=/etc/uv4l/uv4l-raspicam.conf \
+  --server-option=--editable-config-file=/etc/uv4l/uv4l-raspicam.conf
+Restart=on-abnormal
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

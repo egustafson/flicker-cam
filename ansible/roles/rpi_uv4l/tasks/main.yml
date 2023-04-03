@@ -1,0 +1,49 @@
+---
+# file:  [ansible]/roles/rpi_uv4l/tasks/main.yml
+#
+#  Install UV4L - https://www.linux-projects.org/uv4l/
+#    * https://www.linux-projects.org/uv4l/installation/
+#
+
+- name: add UV4L's apt GPG key
+  become: true
+  apt_key:
+    url: "https://www.linux-projects.org/listing/uv4l_repo/lpkey.asc"
+
+- name: add UV4L's apt repository
+  become: true
+  apt_repository:
+    state: present
+    mode: '0644'
+    repo: "deb https://www.linux-projects.org/listing/uv4l_repo/raspbian/stretch stretch main"
+
+- name: install uv4l packages
+  become: true
+  apt:
+    update_cache: true
+    state: latest
+    name:
+      - uv4l 
+      - uv4l-raspicam
+      - uv4l-server
+
+- name: install systemd unit (service) for uv4l 
+  become: true
+  template:
+    src: templates/uv4l.service.j2
+    dest: /etc/systemd/system/uv4l.service
+    owner: root
+    group: root
+    mode: '0444'
+  notify:
+    - systemd daemon reload
+    - restart uv4l
+
+- name: enable uv4l service
+  become: true
+  service:
+    name: uv4l
+    enabled: true
+  notify:
+    - restart uv4l
+...

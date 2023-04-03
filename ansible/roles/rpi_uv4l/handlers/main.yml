@@ -1,0 +1,11 @@
+---
+# file:  [ansible]/roles/rpi_uv4l/handlers/main.yml
+
+- name: restart uv4l
+  become: true
+  service:
+    name: uv4l
+    enabled: true
+    state: restarted
+
+...

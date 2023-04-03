@@ -1,0 +1,18 @@
+---
+# Standard upgrade pattern for Ubuntu hosts on Elfwerks
+#
+- name: auto-remove old packages
+  become: true
+  apt:
+    update_cache: yes
+    autoremove: yes
+
+- name: Run apt update + full-upgrade
+  become: true
+  apt:
+    upgrade: full
+
+- name: Clean package cache
+  become: true
+  apt:
+    autoclean: yes
