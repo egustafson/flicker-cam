@@ -1,5 +1,0 @@
----
-- import_tasks: debian-update.yml
-  when: ansible_os_family|lower == 'debian'
-- import_tasks: freebsd-update.yml
-  when: ansible_os_family|lower == 'freebsd'

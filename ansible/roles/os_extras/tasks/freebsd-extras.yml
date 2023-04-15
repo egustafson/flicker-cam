@@ -1,8 +1,0 @@
----
-# Extras to install on FreeBSD variants.
-
-## Nothing yet
-- debug:
-    msg: "nothing extra for FreeBSD ... yet"
-
-...
