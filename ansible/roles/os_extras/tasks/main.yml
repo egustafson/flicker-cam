@@ -1,0 +1,10 @@
+---
+# OS Extra's to install
+
+- import_tasks: debian-extras.yml
+  when: ansible_os_family|lower == 'debian'
+
+- import_tasks: freebsd-extras.yml
+  when: ansible_os_family|lower == 'freebsd'
+
+...

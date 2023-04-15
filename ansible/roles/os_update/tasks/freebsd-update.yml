@@ -1,0 +1,19 @@
+---
+## Update a FreeBSD host; both OS (freebsd-update) and packages
+## (pkgng).
+##
+- name: Fetch FreeBSD updates.
+  become: true
+  shell: freebsd-update --not-running-from-cron fetch
+
+- name: Install FreeBSD updates.
+  become: true
+  shell: freebsd-update install
+
+- name: Update FreeBSD packages.
+  become: true
+  shell: pkg -4 update
+
+- name: Upgrade FreeBSD packages.
+  become: true
+  shell: pkg -4 upgrade

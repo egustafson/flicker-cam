@@ -1,0 +1,24 @@
+---
+# Extras to install on Debian variants.
+
+- name: install packages for Bionic
+  become: true
+  apt:
+    state: latest
+    name:
+      python-pip
+  when:
+    - ansible_facts['distribution'] == 'Ubuntu'
+    - ansible_facts['distribution_release'] == 'bionic'
+
+- name: install packages for Focal-Fossa
+  become: true
+  apt:
+    state: latest
+    name:
+      - python-is-python3
+  when:
+    - ansible_facts['distribution'] == 'Ubuntu'
+    - ansible_facts['distribution_release'] == 'focal'
+
+...
